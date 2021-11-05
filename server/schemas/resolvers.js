@@ -38,13 +38,12 @@ const resolvers = {
         },
 
       
-        newUser: async (parent, {username, email, password }) => {
+        addUser: async (parent, {username, email, password}) => {
             const user = await User.create({username, email, password});
             const token = signToken(user);
       
             return { token, user };
           },
-
         saveBook: async (parent, { input }, context) => {
             if (context.user) {
                 const updatedUser = await User.findByIdAndUpdate(
